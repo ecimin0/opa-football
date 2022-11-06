@@ -2,7 +2,7 @@
 # kind: ConfigMap
 # metadata:
 #   name: opa
-#   namespace: runf11s
+#   namespace: opa
 #   labels:
 #     name: opa
 # data:
