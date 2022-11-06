@@ -38,7 +38,7 @@ spec:
           - "--set" 
           - "services.play.url=https://play.openpolicyagent.org" 
           - "--set" 
-          - "bundles.play.resource=bundles/JPQeObdth8"
+          - "bundles.play.resource=bundles/Ks7me35y74"
 # {{- if .Values.opa }}
 #           - "--config-file=/config/config.yaml"
 # {{- end }}
