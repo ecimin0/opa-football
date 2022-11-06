@@ -1,0 +1,22 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: opa
+#   namespace: runf11s
+#   labels:
+#     name: opa
+# data:
+#   nginx.conf: |
+#     events {
+#       worker_connections  100;
+#     }
+#     http {
+#       server {
+#         location / {
+#             add_header Content-Type text/plain;
+#             add_header X-thing thing;
+#             return 200 'while true';
+#             # try_files $uri /construction.gif;
+#         }
+#       }
+#     }
