@@ -76,14 +76,14 @@ spec:
         readinessProbe:
           httpGet:
             path: /
-            scheme: HTTPS
+            scheme: HTTP
             port: 8181
             initialDelaySeconds: 3
             periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /
-            scheme: HTTPS
+            scheme: HTTP
             port: 8181
             initialDelaySeconds: 3
             periodSeconds: 5
