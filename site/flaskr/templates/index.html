@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<!-- <h1 class="inner">{% block title %}Home{% endblock %}</h1> -->
+<!-- {% if g.user %} -->
+<!-- <a class="action" href="{{ url_for('reader.create') }}">New</a> -->
+<!-- {% endif %} -->
+{% endblock %}
+
+{% block content %}
+
+<!-- <script src="../../static/lazy.js"></script> -->
+<!-- <script src="../../static/lazytoo.js"></script> -->
+<script type="module">
+    import LazyLoad from "../../static/lazytoo.js";
+    LazyLoad.init();
+</script>
+
+<div id="carousel">
+    <div class="slide" id="img-container">
+        <!-- <img class="js-lazy-image" data-src="../../static/images/1/0-b.png" src="../../static/images/1/0-b.png" />
+        <img class="js-lazy-image" data-src="../../static/images/1/1-a.png" />
+        <img class="js-lazy-image" data-src="../../static/images/1/1-b.png" /> -->
+
+        <!-- <img class="js-lazy-image" data-src="../../static/images/1/2-a.png" /> -->
+
+        <img data-src="../../static/images/1/0-b.png" src="../../static/images/1/0-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/1-a.png" src="../../static/images/1/1-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/1-b.png" src="../../static/images/1/1-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/2-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/2-b.png" class="js-lazy-image"/>
+
+        <!-- <img data-src="../../static/images/1/3-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/3-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/4-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/4-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/5-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/5-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/6-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/6-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/7-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/7-b.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/8-a.png" class="js-lazy-image"/>
+
+        <img data-src="../../static/images/1/8-b.png" class="js-lazy-image"/> -->
+    </div>
+</div>
+
+{% endblock %}

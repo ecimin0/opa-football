@@ -1,0 +1,167 @@
+
+#color {
+  opacity: 70%;
+  font-size: 72pt;
+  display: block;
+}
+
+#counter {
+  opacity: 70%;
+  font-size: 72pt;
+  display: block;
+}
+
+:root {
+  /* --base: #55b9f3; */
+  --lighten: #ffffff;
+  --darken: #252525;
+  --white: #c8deeb;
+  --shadow: 6px 6px 12px var(--darken), -6px -6px 12px var(--lighten);
+  --inset: inset 6px 6px 12px var(--darken), inset -6px -6px 12px var(--lighten);
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--base);
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold;
+}
+
+button {
+  opacity: 70%;
+  z-index: 10;
+  position: relative;
+  width: 75px;
+  height: 75px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  font-size: 24pt;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 100;
+}
+
+button.clicked {
+  animation: shadowFadeOut 2000ms ease-out forwards;
+}
+
+button.clicked button {
+  animation: fillFadeIn 2000ms ease-out forwards;
+}
+
+.wave {
+  z-index: 1;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 20px 20px 60px var(--darken), -20px -20px 60px var(--lighten);
+  opacity: 0;
+  animation: fadeIn 400ms ease-out forwards, outside_grow 2.5s ease-out,
+    fadeOut 1.5s 1s forwards;
+}
+
+.wave::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  box-shadow: inset 20px 20px 60px var(--darken), inset -20px -20px 60px var(--lighten);
+  animation: inside_grow 2.5s ease-out;
+}
+
+/** One of my worst keyframes, animate width & height.. */
+@keyframes outside_grow {
+  from {
+    width: 10px;
+    height: 10px;
+  }
+  to {
+    width: 1800px;
+    height: 1800px;
+  }
+}
+
+/** This one is ugly too */
+@keyframes inside_grow {
+  from {
+    width: 0px;
+    height: 0px;
+  }
+  to {
+    width: 1790px;
+    height: 1790px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes shadowFadeIn {
+  0% {
+    box-shadow: var(--inset);
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: var(--shadow);
+  }
+}
+
+@keyframes shadowFadeOut {
+  0% {
+    box-shadow: var(--shadow);
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: var(--inset);
+  }
+}
+
+@keyframes fillFadeOut {
+  from {
+    fill: none;
+  }
+  to {
+    fill: currentColor;
+  }
+}
+
+@keyframes fillFadeIn {
+  from {
+    fill: currentcolor;
+  }
+  to {
+    fill: none;
+  }
+}
