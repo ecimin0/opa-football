@@ -31,10 +31,14 @@ spec:
           - ":8181" 
           - "--log-format" 
           - "text" 
-          - "--set decision_logs.console=true" 
-          - "--set bundles.play.polling.long_polling_timeout_seconds=45" 
-          - "--set services.play.url=https://play.openpolicyagent.org" 
-          - "--set bundles.play.resource=bundles/JPQeObdth8"
+          - "--set" 
+          - "decision_logs.console=true" 
+          - "--set" 
+          - "bundles.play.polling.long_polling_timeout_seconds=45" 
+          - "--set" 
+          - "services.play.url=https://play.openpolicyagent.org" 
+          - "--set" 
+          - "bundles.play.resource=bundles/JPQeObdth8"
 # {{- if .Values.opa }}
 #           - "--config-file=/config/config.yaml"
 # {{- end }}
