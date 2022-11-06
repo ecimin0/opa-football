@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prediction-site
-  namespace: colors
+  namespace: opa
   labels:
     name: prediction-site
 spec:
