@@ -1,63 +1,195 @@
 {% extends 'base.html' %}
-
 {% block header %}
-<!-- <h1 class="inner">{% block title %}Home{% endblock %}</h1> -->
-<!-- {% if g.user %} -->
-<!-- <a class="action" href="{{ url_for('reader.create') }}">New</a> -->
-<!-- {% endif %} -->
 {% endblock %}
-
 {% block content %}
 
-<!-- <script src="../../static/lazy.js"></script> -->
-<!-- <script src="../../static/lazytoo.js"></script> -->
-<script type="module">
-    import LazyLoad from "../../static/lazytoo.js";
-    LazyLoad.init();
-</script>
+<head>
+    <title>⚽️</title>
+    <meta charset="UTF-8">
+    <!-- <script language="Javascript" type="text/Javascript" src="app.js" defer></script> -->
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+</head>
 
-<div id="carousel">
-    <div class="slide" id="img-container">
-        <!-- <img class="js-lazy-image" data-src="../../static/images/1/0-b.png" src="../../static/images/1/0-b.png" />
-        <img class="js-lazy-image" data-src="../../static/images/1/1-a.png" />
-        <img class="js-lazy-image" data-src="../../static/images/1/1-b.png" /> -->
-
-        <!-- <img class="js-lazy-image" data-src="../../static/images/1/2-a.png" /> -->
-
-        <img data-src="../../static/images/1/0-b.png" src="../../static/images/1/0-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/1-a.png" src="../../static/images/1/1-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/1-b.png" src="../../static/images/1/1-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/2-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/2-b.png" class="js-lazy-image"/>
-
-        <!-- <img data-src="../../static/images/1/3-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/3-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/4-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/4-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/5-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/5-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/6-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/6-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/7-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/7-b.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/8-a.png" class="js-lazy-image"/>
-
-        <img data-src="../../static/images/1/8-b.png" class="js-lazy-image"/> -->
+<body>
+    <h2> </h2>
+    <div class="row">
+        <div class="column" style="background-color:#01141c; color: #fbfd89;">
+            <h2>input</h2>
+            <!-- <p>Some text..</p> -->
+            <pre><code>
+            {
+                "input": {
+                    "away_goals": 2,
+                    "home_goals": 4,
+                    "prediction_score": 8,
+                    "prediction_string": "+predict 4-1 Jesus x2, marti, saka",
+                    "scorers": [
+                        {
+                            "fgs": true,
+                            "fgs_string": "fgs",
+                            "name": "Jesus",
+                            "num_goals": 2,
+                            "real_name": "Gabriel Jesus"
+                        },
+                        {
+                            "fgs": false,
+                            "fgs_string": "",
+                            "name": "marti",
+                            "num_goals": 1,
+                            "real_name": "Gabriel Martinelli"
+                        },
+                        {
+                            "fgs": false,
+                            "fgs_string": "",
+                            "name": "saka",
+                            "num_goals": 1,
+                            "real_name": "B. Saka"
+                        }
+                    ]
+                }
+            }
+        </code></pre>
+        </div>
+        <div class="column" style="background-color:#547385; color: #FFF;">
+            <h2>data</h2>
+            <!-- <p>Some text..</p> -->
+            <pre><code>
+            {
+                "away_name": "leicester",
+                "goals_away": 2,
+                "goals_home": 4,
+                "home_name": "arsenal",
+                "home_or_away": "home",
+                "events": [
+                    {
+                        "detail": "Normal Goal",
+                        "player": {
+                            "name": "Gabriel Jesus"
+                        },
+                        "team": {
+                            "name": "Arsenal"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "detail": "Normal Goal",
+                        "player": {
+                            "name": "Gabriel Jesus"
+                        },
+                        "team": {
+                            "name": "Arsenal"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "detail": "Own Goal",
+                        "player": {
+                            "name": "W. Saliba"
+                        },
+                        "team": {
+                            "name": "Leicester"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "detail": "Normal Goal",
+                        "player": {
+                            "name": "G. Xhaka"
+                        },
+                        "team": {
+                            "name": "Arsenal"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "detail": "Normal Goal",
+                        "player": {
+                            "name": "J. Maddison"
+                        },
+                        "team": {
+                            "name": "Leicester"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "detail": "Normal Goal",
+                        "player": {
+                            "name": "Gabriel Martinelli"
+                        },
+                        "team": {
+                            "name": "Arsenal"
+                        },
+                        "type": "Goal"
+                    }
+                ],
+                "goals": {
+                    "away": 2,
+                    "home": 4
+                },
+                "teams": {
+                    "away": {
+                        "name": "Leicester",
+                        "winner": false
+                    },
+                    "home": {
+                        "name": "Arsenal",
+                        "winner": true
+                    }
+                }
+            }
+        </code></pre>
+        </div>
     </div>
-</div>
 
+    <div class="container">
+        <form action="signup.html" method="post" id="signup">
+            <h1>Sign Up</h1>
+            <div class="field">
+                <label for="name">home team:</label>
+                <input type="text" id="name" name="home_team" placeholder="home team name" value="arsenal" />
+                <small></small>
+            </div>
+            <div class="field">
+                <label for="name">home goals:</label>
+                <input type="text" id="name" name="home_goals" placeholder="home team goals" value="4" />
+                <small></small>
+            </div>
+            <div class="field">
+                <label for="name">away team:</label>
+                <input type="text" id="name" name="away_team" placeholder="away team name" value="leicester" />
+                <small></small>
+            </div>
+            <div class="field">
+                <label for="name">away goals:</label>
+                <input type="text" id="name" name="away_goals" placeholder="away team goals" value="2" />
+                <small></small>
+            </div>
+            <div class="field">
+                <label for="scorers">choose scorer(s):</label>
+                <select name="players" id="players" multiple size="8">
+                    <option value="gabriel">gabriel</option>
+                    <option value="holding">holding</option>
+                    <option value="jesus">jesus</option>
+                    <option value="lokonga">lokonga</option>
+                    <option value="martinelli">martinelli</option>
+                    <option value="marquinhos">marquinhos</option>
+                    <option value="nketiah">nketiah</option>
+                    <option value="odegaard">odegaard</option>
+                    <option value="partey">partey</option>
+                    <option value="saliba">saliba</option>
+                    <option value="saka">saka</option>
+                    <option value="tierney">tierney</option>
+                    <option value="tomiyasu">tomiyasu</option>
+                    <option value="white">white</option>
+                    <option value="vieira">vieira</option>
+                    <option value="xhaka">xhaka</option>
+                    <option value="zinchenko">zinchenko</option>
+                </select>
+                <br><br>
+                <input type="submit" value="does nothing">
+        </form>
+    </div>
+</body>
+
+</html>
 {% endblock %}
