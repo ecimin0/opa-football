@@ -27,18 +27,20 @@ spec:
         args:
           - "run"
           - "--server"
+          - "--config-file"
+          - "/config/config.yaml"
           - "--addr" 
           - ":8181" 
           - "--log-format" 
           - "text" 
           # - "--set" 
           # - "decision_logs.console=true" 
-          - "--set" 
-          - "bundles.play.polling.long_polling_timeout_seconds=45" 
-          - "--set" 
-          - "services.play.url=https://play.openpolicyagent.org" 
-          - "--set" 
-          - "bundles.play.resource=bundles/Ks7me35y74"
+          # - "--set" 
+          # - "bundles.play.polling.long_polling_timeout_seconds=45" 
+          # - "--set" 
+          # - "services.play.url=https://play.openpolicyagent.org" 
+          # - "--set"
+          # - "https://gitlab.com/ecimino/opa-football/-/jobs/artifacts/master/raw/bundle.tar.gz?job=bundle"
         image: openpolicyagent/opa:0.46.1
         imagePullPolicy: Always
         securityContext:
@@ -71,15 +73,10 @@ spec:
           initialDelaySeconds: 3
           periodSeconds: 5
         volumeMounts:
-          - name: bootstrap
+          - name: opa
             readOnly: true
-            mountPath: /bootstrap
+            mountPath: /config
       volumes:
-        - name: certs
-          secret:
-            secretName: kube-mgmt-cert
-        - name: config
-          secret:
-            secretName: kube-mgmt-config
-        - name: bootstrap
-          emptyDir: {}
+        - name: bundle-config
+          configMap:
+            name: opa
