@@ -132,9 +132,9 @@ spec:
       volumes:
         - name: certs
           secret:
-            secretName: opa-kube-mgmt-cert
+            secretName: kube-mgmt-cert
         - name: config
           secret:
-            secretName: opa-kube-mgmt-config
+            secretName: kube-mgmt-config
         - name: bootstrap
           emptyDir: {}
