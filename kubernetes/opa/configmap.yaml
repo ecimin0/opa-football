@@ -9,11 +9,11 @@ data:
   config.yaml: |
     services:
       - name: opa
-        url: https://gitlab.com/ecimino/opa-football-rego/-/archive/master/
+        url: https://gitlab.com/ecimino/opa-football-rego/-/archive/main/
     bundles:
       football:
         service: opa
-        resource: opa-football-rego-master.tar.gz
+        resource: opa-football-rego-main.tar.gz
         persist: true
         polling:
           min_delay_seconds: 15
