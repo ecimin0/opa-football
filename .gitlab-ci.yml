@@ -19,6 +19,7 @@ include:
 
 bundle:
   image: openpolicyagent/opa:0.46.1-debug
+  entrypoint: ["sh"]
   stage: bundle
   script:
     - opa check rego/bundle/
