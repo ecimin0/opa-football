@@ -18,7 +18,7 @@ include:
 # point the real opa at the bundle
 
 bundle:
-  image: openpolicyagent/opa:0.46.1
+  image: openpolicyagent/opa:0.46.1-debug
   stage: bundle
   script:
     - opa check rego/bundle/
