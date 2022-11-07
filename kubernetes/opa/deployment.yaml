@@ -73,7 +73,7 @@ spec:
           initialDelaySeconds: 3
           periodSeconds: 5
         volumeMounts:
-          - name: opa
+          - name: bundle-config
             readOnly: true
             mountPath: /config
       volumes:
