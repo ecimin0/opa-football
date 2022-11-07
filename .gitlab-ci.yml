@@ -6,25 +6,8 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
-# - test
-- bundle
-# sast:
-#   stage: test
-# include:
-# - template: Security/SAST.gitlab-ci.yml
-
-# make opa container
-# do a thing to put it on git
-# point the real opa at the bundle
-
-bundle:
-  image: 
-    name: openpolicyagent/opa:0.46.1-debug
-    entrypoint: [""]
-  stage: bundle
-  script:
-    - opa check rego/bundle/
-    - opa build -b rego/bundle/
-  artifacts:
-    paths:
-      - bundle.tar.gz
+- test
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
