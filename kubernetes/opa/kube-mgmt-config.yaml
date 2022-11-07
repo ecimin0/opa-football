@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kube-mgmt-config
+  labels:
+    app: kube-mgmt
+type: Opaque
+data:
+  config.yaml: YnVuZGxlczoKICBxdWlja3N0YXJ0OgogICAgcmVzb3VyY2U6IC9idW5kbGVzL2hlbG0ta3ViZXJuZXRlcy1xdWlja3N0YXJ0CiAgICBzZXJ2aWNlOiBjb250cm9sbGVyCmRlZmF1bHRfZGVjaXNpb246IC9oZWxtX2t1YmVybmV0ZXNfcXVpY2tzdGFydC9tYWluCnNlcnZpY2VzOgogIGNvbnRyb2xsZXI6CiAgICB1cmw6IGh0dHBzOi8vd3d3Lm9wZW5wb2xpY3lhZ2VudC5vcmc=
