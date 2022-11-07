@@ -32,7 +32,7 @@ spec:
           - "--addr" 
           - ":8181" 
           - "--log-format" 
-          - "text" 
+          - "json" 
           # - "--set" 
           # - "decision_logs.console=true" 
           # - "--set" 
