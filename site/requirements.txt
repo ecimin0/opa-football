@@ -13,3 +13,4 @@ SQLAlchemy==1.4.43
 typing_extensions==4.4.0
 Werkzeug==2.2.2
 gunicorn==20.1.0
+gevent==21.12.0
