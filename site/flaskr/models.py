@@ -93,8 +93,8 @@ class Fixture(Base):
     # team = relationship('Team', primaryjoin='Fixture.away == Team.team_id', back_populates="away_fixtures") #adds away_fixtures callable to Team class (Team.away_fixtures becomes possible)
     # team1 = relationship('Team', primaryjoin='Fixture.home == Team.team_id', back_populates="home_fixtures")
     
-    team = relationship('Team', primaryjoin='Fixture.away == Team.team_id')
-    team1 = relationship('Team', primaryjoin='Fixture.home == Team.team_id')
+    away_team = relationship('Team', primaryjoin='Fixture.away == Team.team_id')
+    home_team = relationship('Team', primaryjoin='Fixture.home == Team.team_id')
     league = relationship('League')
     season1 = relationship('Season')
 

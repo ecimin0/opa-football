@@ -13,21 +13,16 @@
                 <select class="form-control" id="mainTeamInput" name="main_team">
                     <option value="none" selected disabled hidden>select team</option>
                     {% for t in teams %}
-                    <option value="{{t.name}}">{{t.name}}</option>
+                    <option value="{{t.team_id}}">{{t.name}}</option>
                     {% endfor %}
                 </select>
             </div>
 
-
             <div class="mb-3 form-group" style="display:none">
-                <label for="mainTeamOutput" class="form-label">fixture</label>
+                <label for="mainTeamFixtureInput" class="form-label">fixture</label>
                 <!-- <input type="text" class="form-control" id="mainTeamOutput"> -->
-                <select class="form-control" id="mainTeamOutput">
+                <select class="form-control" id="mainTeamFixtureInput">
                     <option value="none" selected disabled hidden>select fixture</option>
-                    <!-- {% for f in fixtures %}
-                    <option value="{{fixture.home}} - {{fixture.away}}">{{fixture.home}} v {{fixture.away}}</option>
-                    {% endfor %} -->
-                    <!-- <option value=data></option> -->
                 </select>
             </div>
         </form>
@@ -44,20 +39,43 @@
     input.addEventListener('input', updateValue);
 
     async function updateValue(e) {
-        const output = document.getElementById('mainTeamOutput');
+        console.log(input.options[input.selectedIndex].text)
+        // to do: automatically remove all child changes if mainTeamInput changes
+        // hide everything, then call updateValue on mainTeamInput
+        const output = document.getElementById('mainTeamFixtureInput');
         var val = "";
 
         if (e.target.value == "") {
             output.parentElement.style.display = "none";
         } else {
-            await fetch('/api/fixtures', { method: "POST" })
-                .then((response) => response.text())
+            // await fetch('/api/fixtures', { 
+            //         method: "POST", 
+            //         body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         }
+            //     })
+            await fetch('/api/fixtures?team=' + input.options[input.selectedIndex].value, { 
+                    method: "GET", 
+                    // body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then((response) => response.json())
                 .then((data) => {
-                    // console.log(data);
-                    // output.value = data;
+                    output.value = data;
                     output.parentElement.style.display = "block";
                     console.log(data);
-                    document.getElementById('mainTeamOutput').value=data; 
+                    // to do: remove all old children created from selecting a team before creating new ones
+    
+                    for (fixture in data) {
+                        var opt = document.createElement("option");
+                        opt.innerHTML = data[fixture].home + " v " + data[fixture].away + " | " + data[fixture].date ;
+                        // console.log(data[fixture[0]])
+                        output.appendChild(opt);
+                    }
+                    // document.getElementById('mainTeamOutput').value=data; 
                 }).catch((err) => alert(err));
         }
     }

@@ -24,9 +24,9 @@ def index():
     #     return render_template('index.html')
     # else:
         pl_teams_subquery = db.session.query(Fixture.home).filter(Fixture.event_date>'08-05-2022', Fixture.event_date<'08-05-2023', Fixture.league_id==39).subquery()
-        pl_teams_query = db.session.query(Team.name).filter(Team.team_id.in_(select(pl_teams_subquery))).order_by(text("name asc"))
+        pl_teams_query = db.session.query(Team).filter(Team.team_id.in_(select(pl_teams_subquery))).order_by(text("name asc"))
         pl_teams = pl_teams_query
-        
+
         # main_team = request.form.get("main_team")
 
         players = db.session.query(Player).filter_by(team_id=42, active=True).all()
@@ -39,14 +39,21 @@ def index():
 #     fixtures = db.session.query(Fixture).all()
 #     return render_template('predict.html', fixtures=fixtures)
 
+
 @bp.route('/api/fixtures', methods=['GET', 'POST'])
 def api_fixtures():
     if request.method == "POST":
-        main_fixtures_query = db.session.query(Fixture.home,Fixture.away).filter(Fixture.event_date<datetime.datetime.now()).filter(or_(Fixture.home==42, Fixture.away==42))
-        # for f in main_fixtures_query:
-        #     print(f.home)
-        # return render_template('index.html', fixtures=main_fixtures_query)
-        return [(f.home,f.away) for f in main_fixtures_query]
+        post_data = request.json
+        # print(post_data)
+        main_team = post_data.get("team", 0)
+    else:
+        get_data = request.args.get("team", 0)
+        main_team = get_data
+        # print(get_data)
+
+    main_fixtures_query = db.session.query(Fixture).filter(Fixture.event_date<datetime.datetime.now(), Fixture.event_date>'08-05-2022').filter(or_(Fixture.home==main_team, Fixture.away==main_team)).order_by(text("event_date asc")).all()
+    print(main_fixtures_query)
+    return jsonify([{"home": f.home_team.name, "away": f.away_team.name, "date": f.event_date} for f in main_fixtures_query])
 
 
 # new blueprint called api or something to be used by js
