@@ -12,4 +12,4 @@ sqlacodegen==2.3.0
 SQLAlchemy==1.4.43
 typing_extensions==4.4.0
 Werkzeug==2.2.2
-
+gunicorn==20.1.0
