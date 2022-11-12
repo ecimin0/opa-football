@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
 
-</html>
-<!-- <title>{% block title %}{% endblock %} - GRANDLINE.ONE</title> -->
-<title>some title</title>
+<title>⚽️</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
-<nav class="inner">hello</nav>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Testing JS Updates</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
+</head>
 <section class="content">
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %} {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </section>
+
+</html>

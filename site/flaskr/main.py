@@ -4,19 +4,58 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
 from werkzeug.exceptions import abort
+from . import db
+from flaskr.models import *
+from sqlalchemy.sql import select, or_
+import datetime
 
-# from flaskr.auth import login_required
-# from flaskr.db import get_db
 
+bp = Blueprint('main', __name__)
 
-bp = Blueprint('home', __name__)
-
-@bp.route('/')
+@bp.route('/', methods=['GET'])
 def index():
-    # url = create_presigned_url('grandline-one', 'one_piece/1/0-b.png', 90)
-    return render_template('index.html')
-    # return render_template('rayleigh/html/index.html', image=url)
+    # if request.method == "POST":
+    #     home_team = request.form.get("home_team")
+    #     home_goals = request.form.get("home_goals")
+    #     away_team = request.form.get("away_team")
+    #     away_goals = request.form.get("away_goals")
+    #     result = f"{home_team} {home_goals} - {away_goals} {away_team}"
+    #     print(result)
+    #     return render_template('index.html')
+    # else:
+        pl_teams_subquery = db.session.query(Fixture.home).filter(Fixture.event_date>'08-05-2022', Fixture.event_date<'08-05-2023', Fixture.league_id==39).subquery()
+        pl_teams_query = db.session.query(Team.name).filter(Team.team_id.in_(select(pl_teams_subquery))).order_by(text("name asc"))
+        pl_teams = pl_teams_query
+        
+        # main_team = request.form.get("main_team")
 
+        players = db.session.query(Player).filter_by(team_id=42, active=True).all()
+
+        return render_template('index.html', players=players, teams=pl_teams)
+
+
+# @bp.route('/predict/', methods=('GET', 'POST'))
+# def predict():
+#     fixtures = db.session.query(Fixture).all()
+#     return render_template('predict.html', fixtures=fixtures)
+
+@bp.route('/api/fixtures', methods=['GET', 'POST'])
+def api_fixtures():
+    if request.method == "POST":
+        main_fixtures_query = db.session.query(Fixture.home,Fixture.away).filter(Fixture.event_date<datetime.datetime.now()).filter(or_(Fixture.home==42, Fixture.away==42))
+        # for f in main_fixtures_query:
+        #     print(f.home)
+        # return render_template('index.html', fixtures=main_fixtures_query)
+        return [(f.home,f.away) for f in main_fixtures_query]
+
+
+# new blueprint called api or something to be used by js
+# js asks flask for json
+# render around it
+# 1. get all teams active for a season https://v3.football.api-sports.io/teams?league=39&season=2022
+# 1.5 function to pull from different tables and marry teams + season
+# 2. get all fixtures for t team https://v3.football.api-sports.io/fixtures?league=39&season=2022&team=42
+# 3. get all players who participated in that fixture (for main team) https://v3.football.api-sports.io/fixtures/players?fixture=867946&team=42
 
 # @bp.route('/api/nextpage')
 # def nextpage():

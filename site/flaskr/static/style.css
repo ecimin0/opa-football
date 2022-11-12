@@ -1,13 +1,49 @@
 .row {
-    display: flex;
-  }
-  
-  .column {
-    flex: 50%;
-    padding-left: 30px;
-  }
-  
-  body {
-    background-color: #01141c;
-    color: #FFF;
-  }
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding-left: 30px;
+}
+
+body {
+  background-color: #01141c;
+  color: #FFF;
+}
+
+.bg-light-blue {
+  background-color: #547385;
+}
+
+@font-face {
+  font-family: 'cfg-reg';
+  src: url('./fonts/ClearfaceGothicTOT-Regular.otf') format('embedded-opentype'),
+    /* Internet Explorer */
+    url('./fonts/ClearfaceGothicTOT-Regular.otf') format('woff2'),
+    /* Super Modern Browsers */
+    url('./fonts/ClearfaceGothicTOT-Regular.otf') format('woff'),
+    /* Pretty Modern Browsers */
+    url('./fonts/ClearfaceGothicTOT-Regular.otf') format('truetype'),
+    /* Safari, Android, iOS */
+    url('./fonts/ClearfaceGothicTOT-Regular.otf') format('svg');
+  /* Legacy iOS */
+}
+
+.cfg-title {
+  font-size: 72px;
+}
+
+.cfg-reg-yellow {
+  color: #fbfd89;
+  font-family: "cfg-reg";
+}
+
+.center {
+  /* border: 5px solid #FFFF00; */
+  text-align: center;
+}
+
+.form-label {
+  font-size: 30px;
+}

@@ -18,3 +18,7 @@ Werkzeug==2.0.2
 zipp==3.8.0
 zope.event==4.5.0
 zope.interface==5.4.0
+SQLAlchemy==1.4.43
+flask_sqlalchemy==3.0.2
+psycopg2==2.9.5
+python-dotenv==0.21.0
