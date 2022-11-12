@@ -26,6 +26,9 @@ spec:
       - name: prediction-site
         image: registry.gitlab.com/ecimino/opa-football/prediction-site:1.0.5
         imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: sqlalchemy-env
         securityContext:
           allowPrivilegeEscalation: false
           privileged: false
