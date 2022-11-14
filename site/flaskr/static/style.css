@@ -9,7 +9,8 @@
 
 body {
   background-color: #01141c;
-  color: #FFF;
+  background-image: url("bg_large_tp.png");
+  background-size: auto;
 }
 
 .bg-light-blue {
@@ -30,9 +31,9 @@ body {
   /* Legacy iOS */
 }
 
-.cfg-title {
+/* .cfg-title {
   font-size: 72px;
-}
+} */
 
 .cfg-reg-yellow {
   color: #fbfd89;
@@ -46,4 +47,12 @@ body {
 
 .form-label {
   font-size: 30px;
+  /* width: 150px; */
+}
+
+.form-control {
+  font-size: 20px;
+  text-align: center;
+  width: 40%;
+  margin: 0 auto;
 }
