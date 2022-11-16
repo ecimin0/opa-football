@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: prediction-site
-        image: registry.gitlab.com/ecimino/opa-football/prediction-site:1.0.5
+        image: registry.gitlab.com/ecimino/opa-football/prediction-site:1.0.6
         imagePullPolicy: Always
         envFrom:
         - secretRef:
