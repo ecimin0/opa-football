@@ -14,8 +14,9 @@
 
 <body>
     <!-- #01141c -->
-    <!-- <div style="background-color: #fff; width: inherit"> -->
-    <div class="container center">
+    <!-- <div class="card-body"> -->
+    <!-- <div class="container center card-body" style="background-color: #233a47; border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;"> -->
+    <div class="container center card-body" style="border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;">
         <h1 class="cfg-reg-yellow display-2" style="margin-top: 55px;">predict a thing!</h2>
         <h2 class="cfg-reg-yellow">arsenal only!</h2>
         <br>
@@ -32,8 +33,8 @@
                 </select>
             </div>
 
-            <div class="spinner-border" role="status" style="display:none; margin: 0 auto;" id="spinner-border">
-                <span class="visually-hidden"></span>
+            <div class="spinner-grow" role="status" style="display:none; margin: 0 auto;" id="spinner-border">
+                <span class="visually-hidden">loading fixtures</span>
             </div>
 
             <div class="mb-5 form-group" style="display:none">
@@ -43,11 +44,26 @@
                 </select>
             </div>
 
-            <div class="mb-5 form-group" style="display:none" id="showHomeAwayTeams">
-                <label for="homeGoals" class="form-label">home goals</label>
-                <input type="number" class="form-control" id="homeGoals" value="">
-                <label for="awayGoals" class="form-label">away goals</label>
-                <input type="number" class="form-control" id="awayGoals" value="">
+            <div class="mb-5 form-group" style="display:none;" id="showScoringForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="homeGoals" class="form-label">home goals</label>
+                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" style="margin-bottom: 30px;" id="homeGoals" value=0>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="awayGoals" class="form-label">away goals</label>
+                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" style="margin-bottom: 30px;" id="awayGoals" value=0>
+                    </div>
+                    <div>
+                        <label for="scorers" class="form-label">goal scorers</label>
+                        <select class="form-control" id="thing" style="margin-bottom: 30px;" name="main_team">
+                            <option value="none" selected disabled hidden multiple>select player(s)</option>
+                            {% for p in players %}
+                            <option value="{{p.player_name}}">{{p.player_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -141,7 +157,7 @@
         var home_team_input = document.createElement("input");
         var away_team_input = document.createElement("input");
         // await new Promise(r => setTimeout(r, 1000));
-        var unhide_home_away = document.getElementById("showHomeAwayTeams")
+        var unhide_home_away = document.getElementById("showScoringForm")
         unhide_home_away.style = "display: block";
         
 

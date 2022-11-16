@@ -1,15 +1,17 @@
-.row {
+/* .row {
   display: flex;
 }
 
 .column {
   flex: 50%;
   padding-left: 30px;
-}
+} */
 
 body {
   background-color: #01141c;
-  background-image: url("bg_large_tp.png");
+  /* background-color: #003976; */
+  /* background-color: #ce1141; */
+  background-image: url("bg_large_tp_49.png");
   background-size: auto;
 }
 

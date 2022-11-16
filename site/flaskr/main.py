@@ -8,7 +8,7 @@ from . import db
 from flaskr.models import *
 from sqlalchemy.sql import select, or_
 import datetime
-
+import re
 
 bp = Blueprint('main', __name__)
 
@@ -29,7 +29,7 @@ def index():
 
         # main_team = request.form.get("main_team")
 
-        players = db.session.query(Player).filter_by(team_id=42, active=True).all()
+        players = db.session.query(Player).filter_by(team_id=42, active=True).order_by(text("player_name asc")).all()
 
         return render_template('index.html', players=players, teams=pl_teams)
 
@@ -52,8 +52,7 @@ def api_fixtures():
         # print(get_data)
 
     main_fixtures_query = db.session.query(Fixture).filter(Fixture.event_date<datetime.datetime.now(), Fixture.event_date>'08-05-2022').filter(or_(Fixture.home==main_team, Fixture.away==main_team)).order_by(text("event_date asc")).all()
-    # print(main_fixtures_query)
-    return jsonify([{"home": f.home_team.name, "away": f.away_team.name, "date": f.event_date} for f in main_fixtures_query])
+    return jsonify([{"home": f.home_team.name, "away": f.away_team.name, "date": str(f.event_date)[:10]} for f in main_fixtures_query])
 
 
 # new blueprint called api or something to be used by js
