@@ -41,7 +41,7 @@
                         <option value="none" selected disabled hidden>select fixture</option>
                     </select>
                 </div>
-                <div class="mb-5 form-group" style="display:block;" id="showScoringForm">
+                <div class="mb-5 form-group" style="display:none;" id="showScoringForm">
                     <div class="row g-3 justify-content-center">
                         <div class="col-md-2">
                             <label for="homeGoals" class="form-label">home goals</label>
@@ -66,8 +66,8 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="scorersListField" class="form-label">scorers list</label>
-                            <textarea class="form-control" aria-label="" id="scorersListField"></textarea>
+                            <!-- <label for="scorersListField" class="form-label">scorers list</label> -->
+                            <ul class="form-control" aria-label="" id="scorersListField" style="display:none"></ul>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,8 @@
         var val = "";
 
         if (e.target.value == "") {
-            fixtureForm.parentElement.style.display = "none";
+            // fixtureForm.parentElement.style.display = "none";
+            hideElement(fixtureForm.parentElement)
         } else {
             // await fetch('/api/fixtures', { 
             //         method: "POST", 
@@ -123,7 +124,8 @@
                 .then((response) => response.json())
                 .then((data) => {
                     fixtureForm.value = data;
-                    fixtureForm.parentElement.style.display = "block";
+                    // fixtureForm.parentElement.style.display = "block";
+                    showElement(fixtureForm.parentElement)
                     // console.log(data);
 
                     // remove all old children created from selecting a team before creating new ones
@@ -175,7 +177,24 @@
         // var player_text = document.createElement("p");
         // player_text.setAttribute()
         // player_text.innerHTML = e.target.value
-        scorersListField.value += e.target.value + '\r\n';
+        // scorersListField.innerHTML += e.target.value + '\r\n';
+        const slf = document.getElementById('scorersListField');
+        showElement(slf)
+
+        if (slf.textContent.includes(e.target.value)) {
+            //pass; why does javascript do this
+        } else {
+            var player = document.createElement("li");
+            player.innerHTML = e.target.value;
+            scorersListField.appendChild(player);
+        }
+    }
+
+    function showElement(element) {
+        element.style = "display: block";
+    }
+    function hideElement(element) {
+        element.style = "display: none";
     }
 </script>
 
