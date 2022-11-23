@@ -16,56 +16,62 @@
     <!-- #01141c -->
     <!-- <div class="card-body"> -->
     <!-- <div class="container center card-body" style="background-color: #233a47; border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;"> -->
-    <div class="container center card-body" style="border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;">
+    <!-- <div class="container center card-body" style="border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;"> -->
+    <div class="container center" style="margin-top: 90px">
         <h1 class="cfg-reg-yellow display-2" style="margin-top: 55px;">predict a thing!</h2>
-        <h2 class="cfg-reg-yellow">arsenal only!</h2>
-        <br>
-        <br>
-        <form class="cfg-reg-yellow">
-
-            <div class="mb-5 form-group">
-                <label for="mainTeamForm" class="form-label">main team</label>
-                <select class="form-control" id="mainTeamForm" name="main_team">
-                    <option value="none" selected disabled hidden>select team</option>
-                    {% for t in teams %}
-                    <option value="{{t.team_id}}">{{t.name}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="spinner-grow" role="status" style="display:none; margin: 0 auto;" id="spinner-border">
-                <span class="visually-hidden">loading fixtures</span>
-            </div>
-
-            <div class="mb-5 form-group" style="display:none">
-                <label for="mainTeamFixtureInput" class="form-label">fixture</label>
-                <select class="form-control" id="mainTeamFixtureInput">
-                    <option value="none" selected disabled hidden>select fixture</option>
-                </select>
-            </div>
-
-            <div class="mb-5 form-group" style="display:none;" id="showScoringForm">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="homeGoals" class="form-label">home goals</label>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" style="margin-bottom: 30px;" id="homeGoals" value=0>
+            <h2 class="cfg-reg-yellow">arsenal only!</h2>
+            <br>
+            <br>
+            <form class="cfg-reg-yellow">
+                <div class="mb-5 form-group">
+                    <label for="mainTeamForm" class="form-label">main team</label>
+                    <select class="form-control" id="mainTeamForm" name="main_team">
+                        <option value="none" selected disabled hidden>select team</option>
+                        {% for t in teams %}
+                        <option value="{{t.team_id}}">{{t.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="spinner-grow" role="status" style="display:none; margin: 0 auto;" id="spinner-border">
+                    <span class="visually-hidden">loading fixtures</span>
+                </div>
+                <div class="mb-5 form-group" style="display:none">
+                    <label for="mainTeamFixtureInput" class="form-label">fixture</label>
+                    <select class="form-control" id="mainTeamFixtureInput">
+                        <option value="none" selected disabled hidden>select fixture</option>
+                    </select>
+                </div>
+                <div class="mb-5 form-group" style="display:block;" id="showScoringForm">
+                    <div class="row g-3 justify-content-center">
+                        <div class="col-md-2">
+                            <label for="homeGoals" class="form-label">home goals</label>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control"
+                                style="margin-bottom: 40px;" id="homeGoals" placeholder=0>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="awayGoals" class="form-label">away goals</label>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control"
+                                style="margin-bottom: 40px;" id="awayGoals" placeholder=0>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="awayGoals" class="form-label">away goals</label>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" style="margin-bottom: 30px;" id="awayGoals" value=0>
-                    </div>
-                    <div>
-                        <label for="scorers" class="form-label">goal scorers</label>
-                        <select class="form-control" id="thing" style="margin-bottom: 30px;" name="main_team">
-                            <option value="none" selected disabled hidden multiple>select player(s)</option>
-                            {% for p in players %}
-                            <option value="{{p.player_name}}">{{p.player_name}}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="row g-3 justify-content-center">
+                        <div class>
+                            <label for="scorersList" class="form-label">goal scorers</label>
+                            <select class="form-control" id="scorersList" style="margin-bottom: 30px;"
+                                name="scorers_list" multiple>
+                                <!-- <option value="none">select player(s)</option> -->
+                                {% for p in players %}
+                                <option value="{{p.player_name}}">{{p.player_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="scorersListField" class="form-label">scorers list</label>
+                            <textarea class="form-control" aria-label="" id="scorersListField"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
     </div>
     <!-- </div> -->
 </body>
@@ -80,7 +86,10 @@
 
     // fixtureForm.addEventListener('input', function(){spawnHomeAwayTeams(home, away)});
     fixtureForm.addEventListener('input', spawnHomeAwayTeams);
-
+    
+    const scorersList = document.getElementById("scorersList")
+    const scorersListField = document.getElementById("scorersListField")
+    scorersList.addEventListener('input', addPlayerToScorersList);
 
     async function spawnFixtures(e) {
         // console.log(mainTeamInput.options[mainTeamInput.selectedIndex].text)
@@ -104,13 +113,13 @@
                 spinner.style.display = "block";
             }
 
-            await fetch('/api/fixtures?team=' + mainTeamForm.options[mainTeamForm.selectedIndex].value, { 
-                    method: "GET", 
-                    // body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+            await fetch('/api/fixtures?team=' + mainTeamForm.options[mainTeamForm.selectedIndex].value, {
+                method: "GET",
+                // body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     fixtureForm.value = data;
@@ -133,24 +142,24 @@
                         opt.setAttribute("class", "fixtureOption");
                         home = data[fixture].home
                         away = data[fixture].away
-                        opt.innerHTML = data[fixture].home + " v " + data[fixture].away + " | " + data[fixture].date ;
+                        opt.innerHTML = data[fixture].home + " v " + data[fixture].away + " | " + data[fixture].date;
                         fixtureForm.appendChild(opt);
                     }
                     // document.getElementById('mainTeamOutput').value=data; 
                 }).catch((err) => alert(err));
         }
         if (spinner) {
-                spinner.style.display = "none";
+            spinner.style.display = "none";
         }
     }
 
 
-    function removeElementsByClass(className){
+    function removeElementsByClass(className) {
         const elements = document.getElementsByClassName(className);
-        while(elements.length > 0){
+        while (elements.length > 0) {
             elements[0].parentNode.removeChild(elements[0]);
         }
-}
+    }
 
 
     async function spawnHomeAwayTeams() {
@@ -159,20 +168,14 @@
         // await new Promise(r => setTimeout(r, 1000));
         var unhide_home_away = document.getElementById("showScoringForm")
         unhide_home_away.style = "display: block";
-        
+    }
 
-        // console.log(home)
-        // console.log(away)
-
-        // const homeGoals = document.getElementById('homeGoals');
-        // // console.log(homeTeam)
-        // const awayGoals = document.getElementById('awayGoals');
-
-        // homeTeam.value = home
-        // // homeTeam.appendChild(home);
-
-        // awayTeam.value = away
-        // awayTeam.appendChild(away);
+    async function addPlayerToScorersList(e) {
+        // to do: fetch list of players for this fixture
+        // var player_text = document.createElement("p");
+        // player_text.setAttribute()
+        // player_text.innerHTML = e.target.value
+        scorersListField.value += e.target.value + '\r\n';
     }
 </script>
 
