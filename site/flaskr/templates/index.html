@@ -17,11 +17,11 @@
     <!-- <div class="card-body"> -->
     <!-- <div class="container center card-body" style="background-color: #233a47; border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;"> -->
     <!-- <div class="container center card-body" style="border-radius: 2em; padding: .5em .5em 1.5em; margin-top: 90px; width: 60%;"> -->
-    <div class="container center" style="margin-top: 90px">
-        <h1 class="cfg-reg-yellow display-2" style="margin-top: 55px;">predict a thing!</h2>
-            <h2 class="cfg-reg-yellow">arsenal only!</h2>
+    <div class="container center" style="margin-top: 70px">
+        <h1 class="cfg-reg-yellow display-3" style="margin-top: 55px;">predict a thing!</h2>
+            <!-- <h2 class="cfg-reg-yellow">arsenal only!</h2> -->
             <br>
-            <br>
+            <!-- <br> -->
             <form class="cfg-reg-yellow">
                 <div class="mb-5 form-group">
                     <label for="mainTeamForm" class="form-label">main team</label>
@@ -47,27 +47,32 @@
                             <label for="homeGoals" class="form-label">home goals</label>
                             <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control"
                                 style="margin-bottom: 40px;" id="homeGoals" placeholder=0>
+                            <ul aria-label="" id="scorersListField"></ul>
                         </div>
                         <div class="col-md-2">
                             <label for="awayGoals" class="form-label">away goals</label>
                             <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control"
                                 style="margin-bottom: 40px;" id="awayGoals" placeholder=0>
+                            <!-- <ul aria-label="" id="scorersListField"></ul> -->
                         </div>
                     </div>
+                    <br>
                     <div class="row g-3 justify-content-center">
+
+                        <!-- <div class="col-md-6"> -->
+                        <!-- <label for="scorersListField" class="form-label">scorers list</label> -->
+                        <!-- <ul aria-label="" id="scorersListField"></ul> -->
+                        <!-- </div> -->
+
                         <div class>
-                            <label for="scorersList" class="form-label">goal scorers</label>
-                            <select class="form-control" id="scorersList" style="margin-bottom: 30px;"
-                                name="scorers_list" multiple>
+                            <label for="scorersList" class="form-label">choose scorers</label>
+                            <select size="11" class="form-control" id="scorersList" style="margin-bottom: 30px;"
+                                name="scorers_list">
                                 <!-- <option value="none">select player(s)</option> -->
                                 {% for p in players %}
                                 <option value="{{p.player_name}}">{{p.player_name}}</option>
                                 {% endfor %}
                             </select>
-                        </div>
-                        <div class="col-md-6">
-                            <!-- <label for="scorersListField" class="form-label">scorers list</label> -->
-                            <ul class="form-control" aria-label="" id="scorersListField" style="display:none"></ul>
                         </div>
                     </div>
                 </div>
@@ -81,12 +86,12 @@
     const mainTeamForm = document.getElementById('mainTeamForm');
     mainTeamForm.addEventListener('input', spawnFixtures);
 
-    const fixtureForm = document.getElementById('mainTeamFixtureInput');
-    // console.log(fixtureForm)
+    var main_team = mainTeamForm.options[mainTeamForm.selectedIndex].value
 
+    const fixtureForm = document.getElementById('mainTeamFixtureInput');
     // fixtureForm.addEventListener('input', function(){spawnHomeAwayTeams(home, away)});
     fixtureForm.addEventListener('input', spawnHomeAwayTeams);
-    
+
     const scorersList = document.getElementById("scorersList")
     const scorersListField = document.getElementById("scorersListField")
     scorersList.addEventListener('input', addPlayerToScorersList);
@@ -99,9 +104,9 @@
         var val = "";
 
         if (e.target.value == "") {
-            // fixtureForm.parentElement.style.display = "none";
             hideElement(fixtureForm.parentElement)
         } else {
+            main_team = mainTeamForm.options[mainTeamForm.selectedIndex].value
             // await fetch('/api/fixtures', { 
             //         method: "POST", 
             //         body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
@@ -114,7 +119,7 @@
                 spinner.style.display = "block";
             }
 
-            await fetch('/api/fixtures?team=' + mainTeamForm.options[mainTeamForm.selectedIndex].value, {
+            await fetch('/api/fixtures?team=' + main_team, {
                 method: "GET",
                 // body: JSON.stringify({"team": input.options[input.selectedIndex].value}),
                 headers: {
@@ -124,9 +129,7 @@
                 .then((response) => response.json())
                 .then((data) => {
                     fixtureForm.value = data;
-                    // fixtureForm.parentElement.style.display = "block";
                     showElement(fixtureForm.parentElement)
-                    // console.log(data);
 
                     // remove all old children created from selecting a team before creating new ones
                     var fixtureOption = document.getElementsByClassName('fixtureOption');
@@ -147,7 +150,6 @@
                         opt.innerHTML = data[fixture].home + " v " + data[fixture].away + " | " + data[fixture].date;
                         fixtureForm.appendChild(opt);
                     }
-                    // document.getElementById('mainTeamOutput').value=data; 
                 }).catch((err) => alert(err));
         }
         if (spinner) {
@@ -167,29 +169,39 @@
     async function spawnHomeAwayTeams() {
         var home_team_input = document.createElement("input");
         var away_team_input = document.createElement("input");
-        // await new Promise(r => setTimeout(r, 1000));
-        var unhide_home_away = document.getElementById("showScoringForm")
-        unhide_home_away.style = "display: block";
+        var unhide_home_away = document.getElementById("showScoringForm");
+        showElement(unhide_home_away);
     }
 
     async function addPlayerToScorersList(e) {
         // to do: fetch list of players for this fixture
-        // var player_text = document.createElement("p");
-        // player_text.setAttribute()
-        // player_text.innerHTML = e.target.value
-        // scorersListField.innerHTML += e.target.value + '\r\n';
         const slf = document.getElementById('scorersListField');
         showElement(slf)
 
-        if (slf.textContent.includes(e.target.value)) {
-            //pass; why does javascript do this
-        } else {
+        // if (slf.textContent.includes(e.target.value)) {
+        //     //pass; why does javascript do this
+        // } else {
             var player = document.createElement("li");
             player.innerHTML = e.target.value;
+            player.setAttribute("class", "scorer_li")
             scorersListField.appendChild(player);
-        }
+
+            // Click on a close button to hide the current list item
+            var close = document.getElementsByClassName("scorer_li");
+            var i;
+            for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                // var div = this.parentElement;
+                // var thing = this.Element
+                // thing.style.display = "none";
+                // this.style.display = "none";
+                hideElement(this);
+            }
+            }
+        // }
     }
 
+    // async function removePlayerFromScorersList(e) 
     function showElement(element) {
         element.style = "display: block";
     }
