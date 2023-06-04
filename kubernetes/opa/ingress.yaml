@@ -10,6 +10,16 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
+    - host: opa.ecimino.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: opa
+                port:
+                  name: https
     - host: opa.runf11s.com
       http:
         paths:
@@ -32,6 +42,7 @@ spec:
                   name: https
   tls: # < placing a host in the TLS config will determine what ends up in the cert's subjectAltNames
     - hosts:
+      - opa.ecimino.com
       - opa.runf11s.com
       - opa.f11s.run
       secretName: opa-tls # < cert-manager
