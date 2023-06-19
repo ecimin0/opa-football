@@ -1,0 +1,37 @@
+{
+    "input": {
+        "main_team": "arsenal",
+        "away_goals": 1,
+        "fixture_id": 867956,
+        "guild_id": 193393364819771400,
+        "home_goals": 4,
+        "prediction_id": "rUTnVebLWjepqVQ6",
+        "prediction_score": 8,
+        "prediction_string": "+predict 4-1 Jesus x2, marti, saka",
+        "scorers": [
+            {
+                "fgs": true,
+                "fgs_string": "fgs",
+                "name": "Jesus",
+                "num_goals": 2,
+                "real_name": "Gabriel Jesus"
+            },
+            {
+                "fgs": false,
+                "fgs_string": "",
+                "name": "marti",
+                "num_goals": 1,
+                "real_name": "Gabriel Martinelli"
+            },
+            {
+                "fgs": false,
+                "fgs_string": "",
+                "name": "saka",
+                "num_goals": 1,
+                "real_name": "B. Saka"
+            }
+        ],
+        "timestamp": "2022-08-13 12:02:58.232715",
+        "user_id": 249231078303203330
+    }
+}
