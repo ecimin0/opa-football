@@ -34,7 +34,7 @@ spec:
           - "--log-format" 
           - "json"
           - "--tls-cert-file"
-          - /certs/tls.crt"
+          - "/certs/tls.crt"
           - "--tls-private-key-file"
           - "/certs/tls.key"
           # - "--set" 
