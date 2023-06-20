@@ -33,10 +33,10 @@ spec:
           - ":8181" 
           - "--log-format" 
           - "json"
-          - "--tls-cert-file"
-          - "/certs/tls.crt"
-          - "--tls-private-key-file"
-          - "/certs/tls.key"
+          # - "--tls-cert-file"
+          # - "/certs/tls.crt"
+          # - "--tls-private-key-file"
+          # - "/certs/tls.key"
           # - "--set" 
           # - "decision_logs.console=true" 
           # - "--set" 
@@ -80,13 +80,13 @@ spec:
           - name: bundle-config
             readOnly: true
             mountPath: /config
-          - name: certs
-            readOnly: true
-            mountPath: /certs
+          # - name: certs
+          #   readOnly: true
+          #   mountPath: /certs
       volumes:
         - name: bundle-config
           configMap:
             name: opa
-        - name: certs
-          secret:
-            secretName: opa-server
+        # - name: certs
+        #   secret:
+        #     secretName: opa-server
