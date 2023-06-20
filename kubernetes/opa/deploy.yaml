@@ -32,7 +32,11 @@ spec:
           - "--addr" 
           - ":8181" 
           - "--log-format" 
-          - "json" 
+          - "json"
+          - "--tls-cert-file"
+          - tls.crt"
+          - "--tls-private-key-file"
+          - "tls.key"
           # - "--set" 
           # - "decision_logs.console=true" 
           # - "--set" 
@@ -41,7 +45,7 @@ spec:
           # - "services.play.url=https://play.openpolicyagent.org" 
           # - "--set"
           # - "https://gitlab.com/ecimino/opa-football/-/jobs/artifacts/master/raw/bundle.tar.gz?job=bundle"
-        image: openpolicyagent/opa:0.46.1
+        image: openpolicyagent/opa:0.53.1
         imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
@@ -76,7 +80,13 @@ spec:
           - name: bundle-config
             readOnly: true
             mountPath: /config
+          - name: certs
+            readOnly: true
+            mountPath: /certs
       volumes:
         - name: bundle-config
           configMap:
             name: opa
+        - name: certs
+          secret:
+            secretName: opa-server
